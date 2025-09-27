@@ -1,0 +1,22 @@
+# Core application libraries
+streamlit
+fastapi
+uvicorn[standard]
+python-dotenv
+requests
+python-multipart
+
+# LangChain and Google AI libraries
+langchain
+langgraph
+langchain_google_genai
+langchain-community
+langchain-core
+langchain-text-splitters
+langchain-qdrant
+
+# Data loader and local embedding dependencies
+pypdf
+qdrant-client
+scikit-learn
+numpy
