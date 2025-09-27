@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict
 import logging
@@ -19,9 +20,36 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Add CORS middleware to allow frontend connections
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # Frontend URLs
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Fitness-related keywords for basic validation
+FITNESS_KEYWORDS = {
+    'fitness', 'exercise', 'workout', 'nutrition', 'diet', 'health', 'wellness', 'training', 
+    'muscle', 'strength', 'cardio', 'yoga', 'pilates', 'running', 'walking', 'swimming',
+    'weight', 'calories', 'protein', 'carbs', 'vitamins', 'supplements', 'gym', 'sports',
+    'athletic', 'performance', 'recovery', 'injury', 'rehabilitation', 'physical', 'body',
+    'metabolism', 'endurance', 'flexibility', 'balance', 'coordination', 'posture', 'core',
+    'abs', 'legs', 'arms', 'chest', 'back', 'shoulders', 'biceps', 'triceps', 'quadriceps',
+    'hamstrings', 'glutes', 'pushups', 'squats', 'deadlifts', 'bench', 'press', 'curl',
+    'stretch', 'warm', 'cool', 'rest', 'sleep', 'hydration', 'meal', 'eating', 'food',
+    'healthy', 'fit', 'strong', 'lean', 'bulk', 'cut', 'fat', 'loss', 'gain', 'mass'
+}
+
+def is_fitness_related(text: str) -> bool:
+    """Check if the text contains fitness-related keywords."""
+    text_lower = text.lower()
+    return any(keyword in text_lower for keyword in FITNESS_KEYWORDS)
 
 # --- Pydantic Models for API ---
 class ChatRequest(BaseModel):
@@ -52,10 +80,24 @@ async def upload_pdf(file: UploadFile = File(...)):
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
     """
-    Handles general conversational chat.
+    Handles general conversational chat with fitness topic validation.
     """
     logger.info("Received general chat request.")
     try:
+        # Get the last user message to check if it's fitness-related
+        user_messages = [msg for msg in request.messages if msg["role"] == "user"]
+        if user_messages:
+            last_user_message = user_messages[-1]["content"]
+            
+            # If the question is not fitness-related, return a polite redirect
+            if not is_fitness_related(last_user_message):
+                return {
+                    "response": {
+                        "role": "assistant", 
+                        "content": "I'm REVLINE, a specialized fitness assistant. I can only help with fitness, exercise, nutrition, and wellness topics. Please ask me something related to your health and fitness journey!"
+                    }
+                }
+        
         reconstructed_messages = [
             HumanMessage(content=msg["content"]) if msg["role"] == "user" 
             else AIMessage(content=msg["content"])
@@ -75,10 +117,19 @@ async def chat_endpoint(request: ChatRequest):
 @app.post("/chat-rag")
 async def rag_chat_endpoint(request: RAGRequest):
     """
-    Handles RAG-based chat using the processed PDF.
+    Handles RAG-based chat using the processed PDF with fitness topic validation.
     """
     logger.info(f"Received RAG chat request for question: '{request.question}'")
     try:
+        # Validate if the question is fitness-related
+        if not is_fitness_related(request.question):
+            return {
+                "response": {
+                    "role": "assistant", 
+                    "content": "I'm REVLINE, a specialized fitness assistant. I can only help analyze fitness, exercise, nutrition, and wellness content. Please ask questions related to fitness topics about your uploaded document."
+                }
+            }
+        
         rag_chain = get_rag_chain(collection_name="revline_fitness_docs") # Use fitness collection
         response_content = rag_chain.invoke(request.question)
         
