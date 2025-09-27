@@ -137,3 +137,8 @@ async def rag_chat_endpoint(request: RAGRequest):
     except Exception as e:
         logger.error(f"Error in RAG chat endpoint: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
+
+# Run the server
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)

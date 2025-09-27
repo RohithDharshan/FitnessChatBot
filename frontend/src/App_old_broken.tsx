@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createContext } from 'react';
+import { useState, useEffect, useRef, createContext, useContext } from 'react';
 import axios from 'axios';
 
 // Define a type for our message objects for better code quality
@@ -180,7 +180,7 @@ function App() {
                     theme === 'dark' 
                       ? 'bg-gradient-to-r from-purple-600 to-violet-600 shadow-purple-500/25' 
                       : 'bg-gradient-to-r from-blue-600 to-purple-600 shadow-blue-500/25'
-                  } shadow-lg animate-glow`}>
+                  } shadow-lg`}>
                     <span className="text-white font-bold text-xl animate-pulse">R</span>
                   </div>
                   <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-ping"></div>
@@ -373,7 +373,7 @@ function App() {
                   theme === 'dark' 
                     ? 'bg-gradient-to-r from-violet-600 to-purple-600 shadow-violet-500/25' 
                     : 'bg-gradient-to-r from-blue-600 to-purple-600 shadow-blue-500/25'
-                } shadow-xl animate-glow`}>
+                } shadow-xl`}>
                   <span className="text-white text-xl animate-pulse">🤖</span>
                 </div>
                 {isTyping && (
@@ -399,6 +399,9 @@ function App() {
               </div>
             </div>
           </div>
+            </div>
+          </div>
+        </div>
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-6 lg:p-8">
@@ -525,6 +528,39 @@ function App() {
         </div>
       </div>
     </ThemeContext.Provider>
+  );
+            
+            }
+          </div>
+        </div>
+
+        {/* Input Area */}
+        <div className="p-4 lg:p-6 border-t border-gray-200 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex space-x-4 items-end">
+              <div className="flex-1">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
+                  placeholder="Ask REVLINE for fitness advice..."
+                  disabled={isLoading || (chatMode === 'rag' && !uploadSuccess)}
+                  className="w-full px-6 py-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-base"
+                />
+              </div>
+              <button
+                onClick={handleSendMessage}
+                disabled={isLoading || !inputValue.trim() || (chatMode === 'rag' && !uploadSuccess)}
+                className="w-14 h-14 bg-purple-600 text-white rounded-full hover:bg-purple-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+              >
+                <span className="text-xl">↑</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
