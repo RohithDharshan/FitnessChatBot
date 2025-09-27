@@ -1,34 +1,34 @@
-# REVLINE - AI Fitness Assistant 💪
+# REVLINE - AI Fitness Assistant 
 
 A futuristic fitness chatbot with modern UI, conversation memory, and intelligent context awareness. REVLINE is your dedicated AI fitness assistant that helps with workouts, nutrition, wellness guidance, and document analysis.
 
-## 🚀 Features
+## Features
 
-### 🎯 **Intelligent Fitness Assistant**
+### **Intelligent Fitness Assistant**
 - **Specialized Knowledge**: Focuses exclusively on fitness, nutrition, and wellness topics
 - **Conversation Memory**: Maintains context throughout conversations for personalized responses
 - **Context Awareness**: Understands follow-up questions and contextual responses
 - **Positive Feedback Recognition**: Acknowledges user appreciation and provides motivational responses
 
-### 💪 **Comprehensive Workout Plans**
+### **Comprehensive Workout Plans**
 - **Muscle Group Specific**: Detailed workouts for chest, back, legs, shoulders, arms, and core
 - **Fitness Level Adaptation**: Beginner, intermediate, and advanced programs
 - **Home & Gym Variants**: Bodyweight and equipment-based exercise options
 - **Quick Workouts**: 10-minute HIIT routines for busy schedules
 
-### 🎨 **Modern UI & Experience**
+### **Modern UI & Experience**
 - **Futuristic Design**: Dark/light theme toggle with smooth animations
 - **Responsive Interface**: Works perfectly on desktop and mobile devices
 - **Custom Animations**: Fade-in effects, glowing elements, and smooth transitions
 - **Document Chat**: Upload and analyze fitness-related PDFs and documents
 
-### 🧠 **Advanced Context Intelligence**
+### **Advanced Context Intelligence**
 - **Topic Validation**: Automatically filters non-fitness topics
 - **Smart Follow-ups**: Understands contextual responses like "home", "average", "beginner"
 - **Memory Persistence**: Remembers previous discussions for better continuity
 - **Feedback Recognition**: Responds appropriately to positive feedback and encouragement
 
-## 🛠 **Technology Stack**
+## **Technology Stack**
 
 ### **Frontend**
 - **React + TypeScript**: Modern component-based architecture
@@ -58,7 +58,7 @@ fitness chatbot/
 └── README.md               # Project documentation
 ```
 
-## 🚀 **Getting Started**
+##  **Getting Started**
 
 ### **Prerequisites**
 - Node.js 16+ and npm/yarn
@@ -90,7 +90,7 @@ fitness chatbot/
    - Frontend: http://localhost:5173
    - Backend API: http://localhost:8000
 
-## 🎯 **Usage Examples**
+## **Usage Examples**
 
 ### **Basic Fitness Queries**
 - "Create a 10 min workout plan" → Get instant HIIT routine
@@ -106,7 +106,7 @@ fitness chatbot/
 - Upload fitness PDFs → Ask questions about the content
 - Non-fitness documents → Polite redirection to fitness topics
 
-## 🏗 **Architecture**
+##  **Architecture**
 
 ### **Conversation Flow**
 1. **Input Validation**: Checks if query is fitness-related
@@ -120,7 +120,7 @@ fitness chatbot/
 - **Backend API**: Processes queries and maintains conversation state
 - **Document Processor**: Analyzes uploaded fitness documents
 
-## 👥 **Team Members**
+##  **Team Members**
 
 - **23N241** - Rohith Dharshan M
 - **23N232** - Nikileshh S  
@@ -129,7 +129,7 @@ fitness chatbot/
 - **23N248** - Sanjeev MS
 - **23Z348** - NV Sri Ram
 
-## 🎨 **Design Philosophy**
+## **Design Philosophy**
 
 REVLINE combines cutting-edge AI technology with a user-centric design approach:
 
@@ -139,7 +139,7 @@ REVLINE combines cutting-edge AI technology with a user-centric design approach:
 - **Accessibility**: Works across devices and user preferences
 - **Performance**: Fast, responsive interactions with smooth animations
 
-## 🔮 **Future Enhancements**
+##  **Future Enhancements**
 
 - **Workout Tracking**: Log and monitor fitness progress
 - **Nutrition Calculator**: Macro and calorie counting tools
@@ -148,14 +148,14 @@ REVLINE combines cutting-edge AI technology with a user-centric design approach:
 - **Wearable Integration**: Connect with fitness trackers and smartwatches
 - **AI Coaching**: Personalized training programs with progress adaptation
 
-## 🤝 **Contributing**
+##  **Contributing**
 
 We welcome contributions! Please feel free to submit issues, feature requests, or pull requests to help improve REVLINE.
 
-## 📄 **License**
+## **License**
 
 This project is developed as part of an academic assignment. All rights reserved.
 
 ---
 
-**REVLINE** - Your AI-powered fitness journey starts here! 💪🚀
+**REVLINE** - Your AI-powered fitness journey starts here!
